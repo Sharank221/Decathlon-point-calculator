@@ -1,0 +1,99 @@
+
+#include <stdio.h>
+#include <math.h>
+
+double decathlonPoints(double A, double B, double result)
+{
+    double powResult = pow(result , B);
+    return A * powResult;
+}
+
+int main()
+{
+    double A = 0.1, B = 1.8;
+    int n;
+    printf("****************************************************************");
+    printf("\n-------------WELCOME TO DECATHLON POINT CALCULATOR-------------");
+    printf("\n****************************************************************");
+    printf("\n");
+    printf("Enter the number of performers: ");
+    scanf("%d", &n);
+
+    char names[n][100];
+    double results[n][10], totalPoints[n];
+
+    for (int i = 0; i < n; i++) 
+    {
+        printf("\nPerformer :%d\n", i + 1);
+        printf("Enter the Name: ");
+        scanf("%s", names[i]);
+
+        printf("Enter the Age: ");
+        int age;
+        scanf("%d", &age);
+
+        for (int j = 0; j < 1; j++)  // Corrected loop condition
+        {
+            printf("Enter the performance in 100mts (in sec): ");
+            scanf("%lf", &results[i][0]);
+
+            printf("Enter the performance in Long Jump (in cm): ");
+            scanf("%lf", &results[i][1]);
+
+            printf("Enter the performance in Shotput (in mts): ");
+            scanf("%lf", &results[i][2]);
+
+            printf("Enter the performance in High Jump (in cm): ");
+            scanf("%lf", &results[i][3]);
+
+            printf("Enter the performance in 400mts (in sec): ");
+            scanf("%lf", &results[i][4]);
+
+            printf("Enter the performance in 110 Hurdles (in sec): ");
+            scanf("%lf", &results[i][5]);
+
+            printf("Enter the performance in Discus Throw (in mts): ");
+            scanf("%lf", &results[i][6]);
+
+            printf("Enter the performance in Pole Vault (in mts): ");
+            scanf("%lf", &results[i][7]);
+
+            printf("Enter the performance in Javelin Throw (in mts): ");
+            scanf("%lf", &results[i][8]);
+
+            printf("Enter the performance in 1500mts (in sec): ");
+            scanf("%lf", &results[i][9]);
+        }
+
+        totalPoints[i] = 0;
+        for (int j = 0; j < 10; j++) 
+        {
+            totalPoints[i] += decathlonPoints(A, B, results[i][j]);
+        }
+    }
+
+    // highest total points
+    int maxPointsIndex = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (totalPoints[i] > totalPoints[maxPointsIndex])
+        {
+            maxPointsIndex = i;
+        }
+    }
+
+    printf("\n----------------Results-------------------\n");
+    
+    for (int i = 0; i < n; i++)
+    {
+        printf("\nPerformer %d - Name: %s - Total Points: %.3f.\n", i + 1, names[i], totalPoints[i]);
+    }
+    printf("\n--------------HIGHEST POINT----------------\n");
+    printf("\n %s has the highest decathlon point",names[maxPointsIndex]);
+
+    printf("\n\n*******THANK YOU FOR USING OUR CALCULATOR*******");
+
+    return 0;
+}
+
+
